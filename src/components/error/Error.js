@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 function Error() {
+  //   const error = useRouteError();
+  //   console.error(error);
+
   return (
     <>
       <Link
@@ -10,8 +13,11 @@ function Error() {
       >
         back to home
       </Link>
-      <div className=" text-center h-screen flex justify-center items-center">
-        <h1 className=" text-4xl">Ops! 404 not found. </h1>
+      <div className=" text-center min-h-screen flex justify-center items-center">
+        <div>
+          <h1 className=" text-4xl">Oops!</h1>
+          <p>Sorry, an unexpected error has occured!</p>
+        </div>
       </div>
     </>
   );

@@ -16,9 +16,27 @@ function App() {
           path: "/",
           element: <Home></Home>,
         },
+        // {
+        //   path: "/home",
+        //   element: <Home></Home>,
+        // },
         {
           path: "/services",
+          loader: async () => {
+            return fetch(
+              `https://www.themealdb.com/api/json/v1/1/categories.php`
+            );
+          },
           element: <Services></Services>,
+          children: [
+            {
+              path: "/services/:category_name",
+              // loader: async ({ params }) => {
+              //   console.log(params);
+              // },
+              element: <h1 className=" text-4xl text-center">hello</h1>,
+            },
+          ],
         },
         {
           path: "/contact",
