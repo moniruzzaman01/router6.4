@@ -3,6 +3,8 @@ import About from "./components/about/About";
 import Contact from "./components/contact/Contact";
 import Error from "./components/error/Error";
 import Home from "./components/home/Home";
+import Meals from "./components/meals/Meals";
+import MealD from "./components/meal_details/MealD";
 import Services from "./components/services/Services";
 import Main from "./layout/Main";
 
@@ -21,7 +23,7 @@ function App() {
         //   element: <Home></Home>,
         // },
         {
-          path: "/services",
+          path: "services",
           loader: async () => {
             return fetch(
               `https://www.themealdb.com/api/json/v1/1/categories.php`
@@ -30,20 +32,30 @@ function App() {
           element: <Services></Services>,
           children: [
             {
-              path: "/services/:category_name",
-              // loader: async ({ params }) => {
-              //   console.log(params);
-              // },
-              element: <h1 className=" text-4xl text-center">hello</h1>,
+              path: ":category_name",
+              loader: async ({ params }) => {
+                return fetch(
+                  `https://www.themealdb.com/api/json/v1/1/search.php?s=${params.category_name}`
+                );
+              },
+              element: <Meals></Meals>,
+            },
+            {
+              path: ":category_name/:meal_id",
+              loader: async ({ params }) =>
+                fetch(
+                  `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.meal_id}`
+                ),
+              element: <MealD></MealD>,
             },
           ],
         },
         {
-          path: "/contact",
+          path: "contact",
           element: <Contact></Contact>,
         },
         {
-          path: "/about",
+          path: "about",
           element: <About></About>,
         },
       ],

@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
 import MealC from "../meal_category/MealC";
 
 function Services() {
@@ -7,13 +7,16 @@ function Services() {
 
   return (
     <>
-      <div className=" grid grid-cols-3 gap-5 w-[90%] mx-auto">
+      <div className=" flex justify-center gap-5 text-blue-600 underline">
         {categories &&
           categories.map((cat, index) => (
-            <MealC key={index} category={cat}></MealC>
+            <Link to={`${cat.strCategory}`} key={index}>
+              {cat.strCategory}
+            </Link>
+            // <MealC key={index} category={cat}></MealC>
           ))}
       </div>
-      {/* <Outlet></Outlet> */}
+      <Outlet></Outlet>
     </>
   );
 }
