@@ -1,49 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
-function MealC({ category }) {
-  const { strCategory, strCategoryThumb } = category;
+function MealC() {
+  const { categories } = useLoaderData();
+  console.log(categories);
 
   return (
-    <div className="max-w-md bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-      {/* <Link to={`/${strCategory}`}>
-        <img
-          className="rounded-t-lg mx-auto p-5"
-          src={strCategoryThumb}
-          alt=""
-        />
-      </Link> */}
-      <Link to={`/services/${strCategory}`}>{strCategory}</Link>
-      {/* <div class="p-5">
-          <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Noteworthy technology acquisitions 2021
-            </h5>
-          </a>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
-          <a
-            href="#"
-            class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    <div className=" grid grid-cols-3 gap-5 w-[90%] mx-auto">
+      {categories &&
+        categories.map((cat, index) => (
+          <div
+            key={index}
+            className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-5"
           >
-            Read more
-            <svg
-              aria-hidden="true"
-              class="ml-2 -mr-1 w-4 h-4"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </a>
-        </div> */}
+            <Link to={`${cat.strCategory}`}>
+              <img
+                className="rounded-t-lg mx-auto p-5"
+                src={cat.strCategoryThumb}
+                alt=""
+              />
+              <h3 className=" text-3xl text-center">{cat.strCategory}</h3>
+            </Link>
+          </div>
+        ))}
     </div>
   );
 }

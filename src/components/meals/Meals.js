@@ -3,7 +3,6 @@ import { Link, useLoaderData } from "react-router-dom";
 
 function Meals() {
   const { meals } = useLoaderData();
-  console.log(meals);
 
   return (
     <>

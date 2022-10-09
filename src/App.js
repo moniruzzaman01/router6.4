@@ -4,6 +4,7 @@ import Contact from "./components/contact/Contact";
 import Error from "./components/error/Error";
 import Home from "./components/home/Home";
 import Meals from "./components/meals/Meals";
+import MealC from "./components/meal_category/MealC";
 import MealD from "./components/meal_details/MealD";
 import Services from "./components/services/Services";
 import Main from "./layout/Main";
@@ -49,6 +50,32 @@ function App() {
               element: <MealD></MealD>,
             },
           ],
+        },
+        {
+          path: ":meals",
+          loader: async () => {
+            return fetch(
+              `https://www.themealdb.com/api/json/v1/1/categories.php`
+            );
+          },
+          element: <MealC></MealC>,
+        },
+        {
+          path: ":meals/:category_name",
+          loader: async ({ params }) => {
+            return fetch(
+              `https://www.themealdb.com/api/json/v1/1/search.php?s=${params.category_name}`
+            );
+          },
+          element: <Meals></Meals>,
+        },
+        {
+          path: ":meals/:category_name/:meal_id",
+          loader: async ({ params }) =>
+            fetch(
+              `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.meal_id}`
+            ),
+          element: <MealD></MealD>,
         },
         {
           path: "contact",
